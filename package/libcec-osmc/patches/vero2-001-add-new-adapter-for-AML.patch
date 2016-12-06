@@ -1,4 +1,4 @@
-From b11257f5821e2f0bde0833d54697aa8ef7085065 Mon Sep 17 00:00:00 2001
+From 5024de31286624e925cdc1696f72351eead60199 Mon Sep 17 00:00:00 2001
 From: Gerald Dachs <gda@dachsweb.de>
 Date: Thu, 3 Mar 2016 09:38:44 +0100
 Subject: [PATCH] new adapter for amlogic devices
@@ -70,7 +70,7 @@ index d3eefa3..125512b 100644
                  adapter/AOCEC/AOCECAdapterDetection.h
                  adapter/AOCEC/AOCECAdapterCommunication.h
 diff --git a/src/libcec/adapter/AdapterFactory.cpp b/src/libcec/adapter/AdapterFactory.cpp
-index 1e946e6..7c26214 100644
+index 1e946e6..a539394 100644
 --- a/src/libcec/adapter/AdapterFactory.cpp
 +++ b/src/libcec/adapter/AdapterFactory.cpp
 @@ -58,6 +58,11 @@
@@ -104,16 +104,20 @@ index 1e946e6..7c26214 100644
  
  #if !defined(HAVE_RPI_API) && !defined(HAVE_P8_USB) && !defined(HAVE_TDA995X_API) && !defined(HAVE_AOCEC_API)
  #error "libCEC doesn't have support for any type of adapter. please check your build system or configuration"
-@@ -177,7 +194,12 @@ IAdapterCommunication *CAdapterFactory::GetInstance(const char *strPort, uint16_
-   return new CUSBCECAdapterCommunication(m_lib->m_cec, strPort, iBaudRate);
+@@ -173,11 +190,16 @@ IAdapterCommunication *CAdapterFactory::GetInstance(const char *strPort, uint16_
+     return new CRPiCECAdapterCommunication(m_lib->m_cec);
  #endif
  
--#if !defined(HAVE_RPI_API) && !defined(HAVE_P8_USB) && !defined(HAVE_TDA995X_API) && !defined(HAVE_EXYNOS_API)
 +#if defined(HAVE_AMLOGIC_API)
 +  if (!strcmp(strPort, CEC_AMLOGIC_VIRTUAL_COM))
 +    return new CAmlogicCECAdapterCommunication(m_lib->m_cec);
 +#endif
 +
+ #if defined(HAVE_P8_USB)
+   return new CUSBCECAdapterCommunication(m_lib->m_cec, strPort, iBaudRate);
+ #endif
+ 
+-#if !defined(HAVE_RPI_API) && !defined(HAVE_P8_USB) && !defined(HAVE_TDA995X_API) && !defined(HAVE_EXYNOS_API)
 +#if !defined(HAVE_RPI_API) && !defined(HAVE_P8_USB) && !defined(HAVE_TDA995X_API) && !defined(HAVE_EXYNOS_API) && !defined(HAVE_AMLOGIC_API)
    return NULL;
  #endif
