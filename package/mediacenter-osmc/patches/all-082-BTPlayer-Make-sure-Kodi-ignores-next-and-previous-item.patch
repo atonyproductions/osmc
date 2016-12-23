@@ -1,7 +1,7 @@
-From 3d502d80549cf0c6db6516792422952cee333f86 Mon Sep 17 00:00:00 2001
+From 5cd8c2ff61061d94d0a14fe415ab0892b6d56744 Mon Sep 17 00:00:00 2001
 From: Gerald Barker <gezb@users.noreply.github.com>
 Date: Tue, 20 Dec 2016 23:47:18 +0000
-Subject: [PATCH 4/4] [BTPlayer]Make sure Kodi ignores next item and previous
+Subject: [PATCH 4/4] [BTPlayer] Make sure Kodi ignores next item and previous
  item events coming from BTPlayer
 
 ---
