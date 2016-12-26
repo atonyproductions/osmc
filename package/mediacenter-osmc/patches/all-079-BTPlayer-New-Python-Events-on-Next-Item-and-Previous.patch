@@ -1,7 +1,7 @@
 From 9072444d0ee1b94e001ea285ec202841e4cf337d Mon Sep 17 00:00:00 2001
 From: Gerald Barker <gezb@users.noreply.github.com>
 Date: Tue, 20 Dec 2016 22:44:07 +0000
-Subject: [PATCH 1/4] [BTPlayer] New Python Events on Next Item and Previous
+Subject: [PATCH 1/5] [BTPlayer] New Python Events on Next Item and Previous
  Item
 
 ---
@@ -222,5 +222,5 @@ index 2689451..a035188 100644
    virtual void Announce(ANNOUNCEMENT::AnnouncementFlag flag, const char *sender, const char *message, const CVariant &data);
    void RegisterPythonPlayerCallBack(IPlayerCallback* pCallback);
 -- 
-2.5.0
+2.7.4
 

@@ -1,7 +1,7 @@
-From c9a80ed369a1d78a15d8638f0a7606936c70680b Mon Sep 17 00:00:00 2001
+From 6b7720ab4d364e9cfec649a1ac079f8c15841573 Mon Sep 17 00:00:00 2001
 From: Gerald Barker <gezb@users.noreply.github.com>
 Date: Tue, 20 Dec 2016 22:47:27 +0000
-Subject: [PATCH 2/4] [BTPlayer] New Player to display track details via A2DP
+Subject: [PATCH 3/5] [BTPlayer] New Player to display track details via A2DP
 
 ---
  Makefile.in                                        |   1 +
@@ -44,7 +44,7 @@ index a6d8b10..a824d1d 100644
      xbmc/messaging/helpers/Makefile \
 diff --git a/xbmc/cores/btplayer/BTPlayer.cpp b/xbmc/cores/btplayer/BTPlayer.cpp
 new file mode 100644
-index 0000000..0b48656
+index 0000000..63fcc69
 --- /dev/null
 +++ b/xbmc/cores/btplayer/BTPlayer.cpp
 @@ -0,0 +1,392 @@
@@ -222,17 +222,14 @@ index 0000000..0b48656
 +  }
 +  if (tag.GetTitle().compare(track["Title"].asString()) != 0)
 +  {
-+    CLog::Log (LOGDEBUG, "Title Changed %s %s", tag.GetTitle().c_str(), track["Title"].asString().c_str());
 +    trackDetailsChanged = true;
 +  }
 +  if (tag.GetAlbum().compare(track["Album"].asString()) != 0)
 +  {
-+    CLog::Log (LOGDEBUG, "Album Changed");
 +    trackDetailsChanged = true;
 +  }
 +  if (tag.GetTrackNumber() != track["TrackNumber"].asInteger())
 +  {
-+    CLog::Log (LOGDEBUG, "TrackNumber Changed");
 +    trackDetailsChanged = true;
 +  }
 +  return trackDetailsChanged;
@@ -241,7 +238,8 @@ index 0000000..0b48656
 +void BTPlayer::updateA2DPInfo(std::string& destination_path)
 +{
 +  bool trackDetailsChanged = false;
-+  int numberOfTracks = m_numberOfTracks;;
++  int numberOfTracks = m_numberOfTracks;
++  int trackNumber = 0;
 +  // get details from bluez
 +  CVariant track = CDBusUtil::GetVariant("org.bluez",
 +                                         destination_path.c_str(),
@@ -260,6 +258,7 @@ index 0000000..0b48656
 +	m_tag.SetAlbum(track["Album"].asString());
 +	m_tag.SetTrackNumber(track["TrackNumber"].asInteger(0));
 +	numberOfTracks = track["NumberOfTracks"].asInteger(0);
++	trackNumber = track["TrackNumber"].asInteger(0);
 +      }
 +      m_playerGUIData.m_totalTime = track["Duration"].asUnsignedInteger(0);
 +    }
@@ -289,7 +288,7 @@ index 0000000..0b48656
 +	    }
 +	}
 +    }
-+  // update the paylist size if the number of tracks have changed
++  // update the playlist size if the number of tracks have changed
 +  if (m_numberOfTracks != numberOfTracks)
 +    {
 +      trackDetailsChanged = true;
@@ -311,6 +310,7 @@ index 0000000..0b48656
 +  if (trackDetailsChanged)
 +  {
 +    CApplicationMessenger::GetInstance().PostMsg(TMSG_UPDATE_CURRENT_ITEM, 0, -1, static_cast<void*>(new CFileItem(m_tag)));
++    CApplicationMessenger::GetInstance().PostMsg(TMSG_PLAYLISTPLAYER_SET_SONG_NO, trackNumber, 0, NULL); 
 +  }
 +}
 +#endif
@@ -815,5 +815,5 @@ index a683d70..cbd53d6 100644
  };
  #endif
 -- 
-2.5.0
+2.7.4
 

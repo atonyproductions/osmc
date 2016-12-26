@@ -1,7 +1,7 @@
-From 5cd8c2ff61061d94d0a14fe415ab0892b6d56744 Mon Sep 17 00:00:00 2001
+From abae9a23053b786cb45c151fe7debb0d03745c83 Mon Sep 17 00:00:00 2001
 From: Gerald Barker <gezb@users.noreply.github.com>
 Date: Tue, 20 Dec 2016 23:47:18 +0000
-Subject: [PATCH 4/4] [BTPlayer] Make sure Kodi ignores next item and previous
+Subject: [PATCH 5/5] [BTPlayer] Make sure Kodi ignores next item and previous
  item events coming from BTPlayer
 
 ---
@@ -27,5 +27,5 @@ index a493970..0800d3c 100644
    // In case of the action PREV_ITEM, we only allow the playlist player to take it if we're less than 3 seconds into playback.
    if (!(action.GetID() == ACTION_PREV_ITEM && m_pPlayer->CanSeek() && GetTime() > 3) )
 -- 
-2.5.0
+2.7.4
 

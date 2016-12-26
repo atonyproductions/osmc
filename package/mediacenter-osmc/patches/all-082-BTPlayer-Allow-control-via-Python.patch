@@ -1,7 +1,7 @@
-From 6304faca5e8bcb914cd73baa074383a384fc56a5 Mon Sep 17 00:00:00 2001
+From 9d525d6279a1274cf85c055593333970ca117440 Mon Sep 17 00:00:00 2001
 From: Gerald Barker <gezb@users.noreply.github.com>
 Date: Tue, 20 Dec 2016 22:49:37 +0000
-Subject: [PATCH 3/4] [BTPlayer] Allow control via Python
+Subject: [PATCH 4/5] [BTPlayer] Allow control via Python
 
 ---
  xbmc/interfaces/legacy/ModuleXbmc.cpp | 32 +++++++++++++++++
@@ -138,5 +138,5 @@ index fcdb253..ae187a7 100644
      ///-----------------------------------------------------------------------
      /// @python_v12 Completely removed.
 -- 
-2.5.0
+2.7.4
 
