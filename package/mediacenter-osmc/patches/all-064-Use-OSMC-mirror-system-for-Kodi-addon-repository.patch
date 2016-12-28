@@ -29,7 +29,7 @@ index cc98ca3..9425e2b 100644
 -		<datadir>http://mirrors.kodi.tv/addons/krypton</datadir>
 -		<hashes>true</hashes>
 +		<info>http://download.osmc.tv/kodi/addons/krypton/addons.xml.gz</info>
-+		<checksum>http://download.osmc.tv/kodi/addons/krypton/krypton.xml.gz.md5</checksum>
++		<checksum>http://download.osmc.tv/kodi/addons/krypton/addons.xml.gz.md5</checksum>
 +		<datadir>http://download.osmc.tv/kodi/addons/krypton</datadir>
 +		<hashes>false</hashes>
  	</extension>
